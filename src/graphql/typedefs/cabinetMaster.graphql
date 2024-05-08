@@ -1,0 +1,18 @@
+input add_cabinet {
+    Cabinet: String
+    IsActive: Boolean
+}
+
+input edit_cabinet {
+    id: Int!
+    Cabinet: String!
+    IsActive: Boolean
+}
+
+type cabinet {
+    id: Int
+    Cabinet: String
+    IsActive: Boolean
+    Created_By: String
+    Created_Date: String
+}

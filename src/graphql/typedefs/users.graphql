@@ -1,0 +1,19 @@
+
+input loginCredentials {
+    username: String
+    email_id: String
+    password: String!
+}
+
+input changePasswordCredentials {
+    username: String
+    email_id: String
+    password: String!
+    newPassword: String!
+}
+
+type authStatus {
+    validUser: Boolean
+    token: String
+    message: String
+}

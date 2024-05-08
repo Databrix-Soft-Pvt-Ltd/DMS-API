@@ -1,0 +1,15 @@
+input tableinput {
+    ID: ID!
+    first_name: String
+    email_id: String
+    password: String
+    is_active: Boolean
+}
+
+type table {
+    ID: ID!
+    first_name: String
+    email_id: String
+    password: String
+    is_active: Boolean
+}

@@ -1,0 +1,22 @@
+
+input add_form_details {
+    database_name: String
+    field_name: String
+    datatype: String
+    max_length: Int
+}
+
+input add_forms {
+    template_id: Int
+    form_details: [add_form_details]
+}
+
+type get_all_forms {
+    database_name: String
+    field_name: String
+    datatype: String
+    template_id: Int
+    template_name: String
+    form_id: Int
+    max_length: Int
+}

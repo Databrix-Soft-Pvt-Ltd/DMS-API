@@ -1,0 +1,16 @@
+type subfolderMap {
+    id: Int
+    user_id: Int
+    subfolder_id: Int
+}
+
+input newSubfolderMap {
+    user_id: Int!
+    subfolder_id: Int!
+}
+
+input deleteSubfolderMapping {
+    id: Int
+    user_id: Int
+    subfolder_id: Int
+}

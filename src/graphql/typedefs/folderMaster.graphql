@@ -1,0 +1,20 @@
+input add_folder {
+    Folder: String!
+    Cabinet_id: Int!
+    Created_By: Int
+}
+
+input edit_folder {
+    id: Int!
+    Folder: String
+    Cabinet_id: Int
+    Created_By: Int
+}
+
+type folder {
+    id: Int
+    Folder: String
+    Cabinet_id: Int
+    Created_By: Int
+    Created_Date: String
+}

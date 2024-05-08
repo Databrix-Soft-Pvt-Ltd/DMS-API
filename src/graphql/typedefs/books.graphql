@@ -1,0 +1,11 @@
+input bookandauthor {
+    book_name: String!
+    author_name: String!
+}
+
+type bookinfo {
+    book_id: Int!
+    book_name: String!
+    author_id: Int!
+    author_name: String!
+}

@@ -1,0 +1,16 @@
+input add_template {
+    name: String
+    page_id: Int
+    is_active: Boolean
+    is_deleted: Boolean
+}
+
+type all_templates {
+    id: Int
+    name: String
+    page_id: Int
+    is_active: Boolean
+    is_deleted: Boolean
+    created_by: String
+    created_date: String
+}

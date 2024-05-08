@@ -1,0 +1,41 @@
+
+type Question {
+  id: ID
+  name: String
+}
+
+type AllQuestionsS {
+    ID: Int
+    Name: String
+    parentId: Int
+    IsParent: Boolean
+    IsChild: Boolean
+}
+
+type AllQuestions {
+  questions: [Question]
+  page: Page
+}
+
+type Page {
+  limit: Int
+  page: Int
+  totalCount: Int
+}
+
+input Filters {
+  eq: String
+  ne: String
+  in: [String]
+  nin: [String]
+  regex: String
+}
+
+input QuestionFilter {
+  category: Filters
+  subject: Filters
+  marks: Filters
+  type: Filters
+  difficulty: Filters
+  chapterId: Filters
+}

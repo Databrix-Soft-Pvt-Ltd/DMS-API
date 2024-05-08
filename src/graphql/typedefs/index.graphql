@@ -1,0 +1,40 @@
+scalar Upload
+
+type Query {
+  getAllTemplates(id: ID, is_active: Boolean): [all_templates]
+  getAllForms(template_id: ID): [get_all_forms]
+  getAllRoles(role_id: ID): [all_roles]
+  getCabinet(id: ID): [cabinet]
+  getFolder(id: ID): [folder]
+  getAllSubfolderMappings(id: ID): [subfolderMap]
+  getSubfoldersOfUser(user_id: ID): [subfolderMap]
+}
+
+type Mutation {
+  addTemplate(add_template: add_template): String
+  editTemplate(id: Int, edit_template: add_template): String
+  deleteTemplate(id: Int): String
+
+  addRole(add_role: add_role): String
+  editRole(id: Int, edit_role: add_role): String
+  deleteRole(id: Int): String
+
+  addForm(add_forms: add_forms): String
+  editForm(edit_form: add_forms): [String]
+  deleteForm(form_id: Int): String
+
+  addCabinet(create_cabinet: add_cabinet): String
+  editCabinet(edit_cabinet: edit_cabinet): String
+  deleteCabinet(id: ID): String
+
+  addFolder(add_folder: add_folder): String
+  editFolder(edit_folder: edit_folder): String
+  deleteFolder(id: ID): String
+
+  addSubfolderMapping(newSubfolderMap: newSubfolderMap): String
+  deleteSubfolderMapping(deleteSubfolderMapping: deleteSubfolderMapping): String
+
+  login(loginCredentials: loginCredentials): authStatus
+  changePassword(changePasswordCredentials: changePasswordCredentials): String
+  resetPasswordThroughEmail(email_id: String): String
+}
