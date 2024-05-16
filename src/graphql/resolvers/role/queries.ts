@@ -10,7 +10,7 @@ const roleQueries = {
                 if (err) {
                     reject(err); // Handle error more specifically if possible
                 } else {
-                    if (rows && rows.length > 0) {
+                    if (rows) {
                         resolve(rows);
                     } else {
                         reject(new Error("No rows returned from the stored procedure."));

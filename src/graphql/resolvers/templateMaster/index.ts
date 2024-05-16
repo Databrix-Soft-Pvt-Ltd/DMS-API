@@ -1,3 +1,3 @@
 // export { default as booksQueries } from './query'
-export { default as TempalteMasterMutations } from './mutation'
-export { default as TemplateMasterQueries } from './query'
+export { default as tempalteMasterMutations } from './mutations'
+export { default as templateMasterQueries } from './queries'

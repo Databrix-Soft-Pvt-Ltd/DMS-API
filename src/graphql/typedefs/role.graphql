@@ -1,13 +1,12 @@
 input add_role {
-    name: String
+    role_name: String!
     description: String
-    is_active: Boolean
-    is_deleted: Boolean
+    created_by: Int
 }
 
 type all_roles {
     id: Int
-    name: String
+    role_name: String
     description: String
     is_active: Boolean
     is_deleted: Boolean

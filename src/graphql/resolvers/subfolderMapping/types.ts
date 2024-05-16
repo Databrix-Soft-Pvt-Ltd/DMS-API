@@ -1,10 +1,10 @@
-export interface addSubfolderMapping {
+export interface addSubFolderMapping {
     user_id: number,
     subfolder_id: number
 }
 
-export interface subfolderMapping extends addSubfolderMapping {
+export interface subFolderMapping extends addSubFolderMapping {
     id: number
 }
 
-export interface deleteSubfolderMapping extends subfolderMapping {}
+export interface deleteSubFolderMapping extends subFolderMapping {}

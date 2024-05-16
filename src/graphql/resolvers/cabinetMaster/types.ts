@@ -1,15 +1,15 @@
-export interface createCabinetMaster {
-    Cabinet: string
+export interface addCabinetMaster {
+    cabinet: string
 }
 
-export interface editCabinetMaster extends createCabinetMaster {
+export interface editCabinetMaster extends addCabinetMaster {
     id: number
 }
 
 export interface cabinetMaster extends editCabinetMaster {
-    IsActive: boolean,
-    Created_By: string,
-    Created_Date: string,
+    is_active: boolean,
+    created_by: string,
+    created_date: string,
 }
 
 export interface deleteCabinetMaster {

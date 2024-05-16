@@ -1,2 +1,2 @@
-export { default as SubfolderMappingQueries } from './queries'
-export { default as SubfolderMappingMutations } from './mutations'
+export { default as subFolderMappingQueries } from './queries'
+export { default as subFolderMappingMutations } from './mutations'

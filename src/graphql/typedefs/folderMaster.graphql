@@ -1,20 +1,21 @@
-input add_folder {
-    Folder: String!
-    Cabinet_id: Int!
-    Created_By: Int
+input add_folder_master {
+    folder: String!
+    cabinet_id: Int!
+    created_by: Int
+    created_date: String
 }
 
-input edit_folder {
+input edit_folder_master {
     id: Int!
-    Folder: String
-    Cabinet_id: Int
-    Created_By: Int
+    folder: String
 }
 
-type folder {
+
+
+type folder_master {
     id: Int
-    Folder: String
-    Cabinet_id: Int
-    Created_By: Int
-    Created_Date: String
+    folder: String
+    cabinet_id: Int
+    created_by: Int
+    created_date: String
 }

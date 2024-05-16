@@ -1,28 +1,34 @@
 import { dbConnection } from "../../../db"
-import { addSubfolderMapping, deleteSubfolderMapping } from "./types"
+import { addSubFolderMapping, deleteSubFolderMapping } from "./types"
 
 const mutations = {
-    addSubfolderMapping: async (_: undefined, { newSubfolderMap }: { newSubfolderMap: addSubfolderMapping } ) : Promise<string> => {
+    addSubFolderMapping: async (_: undefined, { addSubFolderMapping }: { addSubFolderMapping: addSubFolderMapping } ) : Promise<string> => {
 
-        const { user_id, subfolder_id } = newSubfolderMap
+        const { user_id, subfolder_id } = addSubFolderMapping
+        console.log('add sub folder mapping', addSubFolderMapping)
 
         const result: string = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC addSubfolderMapping ?, ?, ?', [user_id, subfolder_id, ''], (err: any, res: any) => {
+            dbConnection.query('EXEC AddSubFolderMapping ?, ?, ?', [user_id, subfolder_id, ''], (err: any, res: any) => {
                 if(err){
                     reject(err)
                 }
-                resolve(res[0].outputMessage)
+                console.log(res)
+                try{
+                    resolve(res[0]?.outputMessage)
+                } catch {
+                    reject('cannot resolve')
+                }
             })
         })
         return result
     },
 
-    deleteSubfolderMapping: async (_:undefined, { deleteSubfolderMapping }: { deleteSubfolderMapping: deleteSubfolderMapping }): Promise<string> => {
+    deleteSubFolderMapping: async (_:undefined, { deleteSubfolderMapping }: { deleteSubfolderMapping: deleteSubFolderMapping }): Promise<string> => {
 
         const { id, user_id, subfolder_id } = deleteSubfolderMapping
 
         const result: string = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC deleteSubfolderMapping ?, ?, ?, ?', [id, user_id, subfolder_id, ''], (err: any, res: any) => {
+            dbConnection.query('EXEC DeleteSubFolderMapping ?, ?, ?, ?', [id, user_id, subfolder_id, ''], (err: any, res: any) => {
                 if(err){
                     reject(err)
                 }

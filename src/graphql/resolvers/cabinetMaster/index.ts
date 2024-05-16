@@ -1,2 +1,2 @@
-export { default as CabinetMasterQueries } from './queries'
-export { default as CabinetMasterMutations } from './mutations'
+export { default as cabinetMasterQueries } from './queries'
+export { default as cabinetMasterMutations } from './mutations'

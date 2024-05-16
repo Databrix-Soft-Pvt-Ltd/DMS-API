@@ -8,7 +8,7 @@ const queries = {
             dbConnection.query('EXEC GetFolderMaster ?', [id], (err, rows: any) => {
                 if(err) reject(err)
 
-                console.log(rows)
+                // console.log(rows)
                 resolve(rows)
             })
         })

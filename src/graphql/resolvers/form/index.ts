@@ -1,3 +1,3 @@
 
-export { default as FormQueries } from './query'
-export { default as FormMutations } from './mutation'
+export { default as formQueries } from './queries'
+export { default as formMutations } from './mutations'

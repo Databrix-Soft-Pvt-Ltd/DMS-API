@@ -1,2 +1,2 @@
-export { default as FolderMasterQueries } from './queries'
-export { default as FolderMasterMutations } from './mutations'
+export { default as folderMasterQueries } from './queries'
+export { default as folderMasterMutations } from './mutations'

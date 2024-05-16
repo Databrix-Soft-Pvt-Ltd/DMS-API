@@ -1,11 +1,11 @@
 import { dbConnection } from '../../../db'
-import { subfolderMapping } from './types'
+import { subFolderMapping } from './types'
 
 const queries = {
-    getAllSubfolderMappings: async (_: undefined): Promise<subfolderMapping[]> => {
+    getAllSubFolderMappings: async (_: undefined): Promise<subFolderMapping[]> => {
 
-        const result: subfolderMapping[] = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC getAllSubfolderMapping', [], (err, res: any) => {
+        const result: subFolderMapping[] = await new Promise((resolve, reject) => {
+            dbConnection.query('EXEC getAllSubFolderMapping', [], (err, res: any) => {
                 if(err){
                     reject(err)
                 }
@@ -15,9 +15,9 @@ const queries = {
         return result
     },
 
-    getSubfoldersOfUser: async (_: undefined, { user_id }: { user_id: number }): Promise<subfolderMapping[]> => {
-        const result: subfolderMapping[] = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC getAllSubfoldersOfUser ?', [user_id], (err, res: any) => {
+    getSubFoldersOfUser: async (_: undefined, { user_id }: { user_id: number }): Promise<subFolderMapping[]> => {
+        const result: subFolderMapping[] = await new Promise((resolve, reject) => {
+            dbConnection.query('EXEC getAllSubFoldersOfUser ?', [user_id], (err, res: any) => {
                 if(err) {
                     reject(err)
                 }

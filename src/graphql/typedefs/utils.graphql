@@ -1,0 +1,4 @@
+type MutationResponse {
+    error: String,
+    message: String
+}

@@ -2,9 +2,7 @@ import { dbConnection } from "../../../db"
 import { cabinetMaster } from "./types"
 
 const queries = {
-    getCabinet: async (_: undefined, data: any): Promise<cabinetMaster[]> => {
-
-        const { id } = data
+    getCabinet: async (_: undefined, { id }: any): Promise<cabinetMaster[]> => {
 
         const result: any = await new Promise((resolve, reject) => {
             dbConnection.query('EXEC GetCabinetMaster ?', [id], (err, rows: any) => {

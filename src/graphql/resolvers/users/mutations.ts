@@ -24,7 +24,6 @@ const mutations = {
                 if (username) {
                     dbConnection.query('select username, email_id, password from users where username=?', [username], (err, res: any) => {
                         if (err) reject(err)
-
                         resolve(res[0])
                     })
                 } else if (email_id) {
@@ -39,9 +38,11 @@ const mutations = {
             authStatus.validUser = await compare(password, result.password)
 
             if (authStatus.validUser === true) {
+                authStatus.message = 'VALID_USER';
                 authStatus.token = jwt.sign({
                     credentials: `${result.username}#${result.email_id}`
                 }, 'secret', { expiresIn: '1h' });
+                authStatus.validUser = true;
             }
         }
 
@@ -90,13 +91,10 @@ const mutations = {
 
                     dbConnection.query('EXEC ChangePassword ?, ?, ?, ?', [credential, type, hashedNewPassword, ''], async (err, res: any) => {
                         if(err) reject(err)
-                        console.log('res', res)
-                        console.log('res output message', res[0]?.outputMessage)
                         resolve(res[0]?.outputMessage)
                     })
                 })
 
-                console.log('return statement: ', returnStatement)
                 return returnStatement
 
             } else {
@@ -111,16 +109,16 @@ const mutations = {
                 port: 587,
                 secure: false, // true for 465, false for other ports
                 auth: {
-                    user: 'shayantan.kabiraj@stridemex.com',
-                    pass: 'xbnv gfgx gtyl yrvx'
+                    user: process.env.EMAIL_SENDER,
+                    pass: process.env.EMAIL_SENDER_PASSWORD
                 }
             });
 
             const newPassword = randomstring.generate({ length: 10 })
             const GTdetails = {
                 //sending male to itself that's why same email is used here
-                from: "shayantan.kabiraj@stridemex.com",
-                to: "shayantank.43@gmail.com",
+                from: process.env.EMAIL_SENDER,
+                to: email_id,
                 subject: 'Enquiry from Website',
                 text: `You New Password is ${newPassword}`,
             };
@@ -130,7 +128,6 @@ const mutations = {
                     console.error(err)
                 }
                 else {
-                    console.log('info', info)
                     try {
                         const hashedNewPassword: string = await hash(newPassword, Number(process.env.BCRYPT_SALT_ROUNDS))
                         const result = await new Promise((resolve, reject) => {
@@ -141,15 +138,13 @@ const mutations = {
                                 resolve('password successfully updated in database')
                             })
                         })
-                        console.log('mango')
                         return result
                     } catch (error) {
                         console.error(error)
                         return 'cannot update password in database.'
                     }
                 }
-            });
-            console.log(res)
+            })
         }
         catch (error) {
             console.error('cannot rejet password through email', error)

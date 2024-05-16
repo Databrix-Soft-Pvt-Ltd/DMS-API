@@ -1,2 +1,2 @@
-export { default as UserQueries } from './queries'
-export { default as UserMutations } from './mutation'
+export { default as userQueries } from './queries'
+export { default as userMutations } from './mutations'

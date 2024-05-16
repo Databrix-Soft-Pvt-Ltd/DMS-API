@@ -1,29 +1,29 @@
-import { createCabinetMaster, deleteCabinetMaster, editCabinetMaster } from "./types"
+import { addCabinetMaster, editCabinetMaster } from "./types"
 import { dbConnection } from "../../../db"
 
 const mutations = {
-    addCabinet: async (_: undefined, { create_cabinet }: { create_cabinet: createCabinetMaster } ): Promise<string> => {
+    addCabinet: async (_: undefined, { add_cabinet_master }: { add_cabinet_master: addCabinetMaster } ): Promise<string> => {
 
-        const { Cabinet } = create_cabinet
+        const { cabinet } = add_cabinet_master
 
         const result: any = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC AddCabinetMaster ?, ?;', [Cabinet, ''], (err, rows: any) => {
+            dbConnection.query('EXEC AddCabinetMaster ?, ?;', [cabinet, ''], (err, rows: any) => {
                 if(err) reject(err)
-                
-                // console.log('Add Cabinet Rows', rows)
-                resolve(rows[0].outputMessage)
+                else {
+                    // console.log(rows)
+                    resolve(rows[0]?.outputMessage)
+                }
             })
         })
-
         return result
     },
 
-    editCabinet: async (_: undefined, { edit_cabinet }: { edit_cabinet: editCabinetMaster }): Promise<string> => {
+    editCabinet: async (_: undefined, { edit_cabinet_master }: { edit_cabinet_master: editCabinetMaster }): Promise<string> => {
 
-        const { id, Cabinet } = edit_cabinet
+        const { id, cabinet } = edit_cabinet_master
 
         const result: any = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC EditCabinetMaster ?, ?, ?;', [id, Cabinet, ''], (err, rows: any) => {
+            dbConnection.query('EXEC EditCabinetMaster ?, ?, ?;', [id, cabinet, ''], (err, rows: any) => {
                 if(err) reject(err)
 
                 // console.log(rows)

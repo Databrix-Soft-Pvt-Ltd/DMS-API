@@ -1,2 +1,2 @@
-export { default as RoleQueries } from './queries'
-export { default as RoleMutations } from './mutation'
+export { default as roleQueries } from './queries'
+export { default as roleMutations } from './mutations'

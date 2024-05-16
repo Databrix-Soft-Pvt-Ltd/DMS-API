@@ -1,40 +1,38 @@
 import { GraphQLUpload } from 'graphql-upload-ts';
+
 import { questionMutations, questionQueries } from './questions';
-import { tableMutation, tableQueries } from './table';
-import { booksMutations, booksQueries } from './books';
-import { TempalteMasterMutations, TemplateMasterQueries } from './templateMaster';
-import { RoleQueries, RoleMutations } from './role';
-import { FormQueries, FormMutations } from './form';
-import { CabinetMasterQueries, CabinetMasterMutations } from './cabinetMaster';
-import { FolderMasterMutations, FolderMasterQueries } from './folderMaster';
-import { SubfolderMappingMutations, SubfolderMappingQueries } from './subfolderMapping';
-import { UserMutations, UserQueries } from './users';
+import { tableMutations, tableQueries } from './table';
+import { tempalteMasterMutations, templateMasterQueries } from './templateMaster';
+import { roleQueries, roleMutations } from './role';
+import { formQueries, formMutations } from './form';
+import { cabinetMasterQueries, cabinetMasterMutations } from './cabinetMaster';
+import { folderMasterQueries, folderMasterMutations } from './folderMaster';
+import { subFolderMappingQueries, subFolderMappingMutations } from './subFolderMapping';
+import { userQueries, userMutations } from './users';
 
 const resolvers = {
   Upload: GraphQLUpload,
   Query: {
     ...questionQueries,
     ...tableQueries,
-    ...booksQueries,
-    ...TemplateMasterQueries,
-    ...FormQueries,
-    ...RoleQueries,
-    ...CabinetMasterQueries,
-    ...FolderMasterQueries,
-    ...SubfolderMappingQueries,
-    ...UserQueries
+    ...templateMasterQueries,
+    ...formQueries,
+    ...roleQueries,
+    ...cabinetMasterQueries,
+    ...folderMasterQueries,
+    ...subFolderMappingQueries,
+    ...userQueries
   },
   Mutation: {
     ...questionMutations,
-    ...tableMutation,
-    ...booksMutations,
-    ...TempalteMasterMutations,
-    ...FormMutations,
-    ...RoleMutations,
-    ...CabinetMasterMutations,
-    ...FolderMasterMutations,
-    ...SubfolderMappingMutations,
-    ...UserMutations
+    ...tableMutations,
+    ...tempalteMasterMutations,
+    ...formMutations,
+    ...roleMutations,
+    ...cabinetMasterMutations,
+    ...folderMasterMutations,
+    ...subFolderMappingMutations,
+    ...userMutations
   },
 };
 
