@@ -3,7 +3,7 @@ import { dbConnection } from '../../../db'
 import { get_roles } from './types'
 
 const roleQueries = {
-    getAllRoles: async (_: undefined, { role_id, is_active }: { role_id: number, is_active: boolean }): Promise<get_roles[]> => {
+    getAllRoles: async (_: undefined, { role_id }: { role_id: number }): Promise<get_roles[]> => {
 
         const result: get_roles[] = await new Promise((resolve, reject) => {
             dbConnection.query('EXEC GetRoles ?', [role_id], (err, rows) => {
@@ -18,6 +18,10 @@ const roleQueries = {
                 }
             });
         });
+
+        result.forEach((item, index) => {
+            result[index].created_date = new Date(item.created_date).toISOString()
+        })
 
         return result;
     }

@@ -18,6 +18,10 @@ const templateQueries = {
                 }
             });
         });
+
+        result.forEach((item, index) => {
+            result[index].created_date = new Date(item.created_date).toISOString()
+        })
         return result;
     }
 }

@@ -15,9 +15,9 @@ type Mutation {
   editTemplate(id: Int, edit_template: add_template): MutationResponse
   deleteTemplate(id: Int): MutationResponse
 
-  addRole(add_role: add_role): String
-  editRole(id: Int, edit_role: add_role): String
-  deleteRole(id: Int): String
+  addRole(add_role: add_role): MutationResponse
+  editRole(id: Int, edit_role: add_role): MutationResponse
+  deleteRole(id: Int): MutationResponse
 
   addForm(add_forms: add_forms): String
   editForm(edit_form: add_forms): [String]
