@@ -1,7 +1,7 @@
 
 import { dbConnection } from "../../../db"
 import { authStatus, changePasswordCredentials, loginCredentials, userInfo } from "./types"
-import { compare, hash } from 'bcrypt'
+import { compare, compareSync, hash } from 'bcrypt'
 import { default as jwt } from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
 import * as randomstring from 'randomstring';
@@ -35,7 +35,7 @@ const mutations = {
                 }
             })
 
-            authStatus.validUser = await compare(password, result.password)
+            authStatus.validUser = compareSync(password, result.password)
 
             if (authStatus.validUser === true) {
                 authStatus.message = 'VALID_USER';
