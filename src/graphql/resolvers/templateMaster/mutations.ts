@@ -70,7 +70,7 @@ const templateMutations = {
                 }
             });
         });
-        
+
         if(result === 'Template Master Deleted Successfully'){
             return { error: null, message: result }
         } else {

@@ -5,8 +5,7 @@ type MssqlError = import('msnodesqlv8/types').Error;
 
 const formQueries = {
     addForm: async (_: undefined, { add_forms }: { add_forms: formMaster }): Promise<string> => {
-        const arr: string[] = []
-        // console.log(add_forms.form_details)
+        console.log(add_forms)
         const promises = add_forms.form_details.map(async (formDetail) => {
             const { database_name, field_name, datatype, max_length } = formDetail;
             try {

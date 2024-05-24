@@ -2,7 +2,6 @@ input add_cabinet_master {
     cabinet: String
     is_active: Boolean
     created_by: String
-    created_date: String
 }
 
 input edit_cabinet_master {
@@ -10,7 +9,6 @@ input edit_cabinet_master {
     cabinet: String!
     is_active: Boolean
     created_by: String
-    created_date: String
 }
 
 type cabinet_master {

@@ -1,8 +1,7 @@
 input add_template {
     name: String
     page_id: Int
-    is_active: Boolean
-    is_deleted: Boolean
+    created_by: Int
 }
 
 type all_templates {

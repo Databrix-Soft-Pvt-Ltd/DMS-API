@@ -3,9 +3,8 @@ export interface addFolderMaster {
     cabinet_id: number
 }
 
-export interface editFolderMaster {
+export interface editFolderMaster extends addFolderMaster {
     id: number
-    folder: string
 }
 
 export interface folderMaster {
@@ -14,6 +13,10 @@ export interface folderMaster {
     cabinet_id: number,
     created_by: string,
     created_date: string,
+}
+
+export interface folderMasterWithCabinet extends folderMaster{
+    cabinet: string
 }
 
 export interface deleteFolderMaster {

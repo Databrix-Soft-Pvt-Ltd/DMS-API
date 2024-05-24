@@ -9,6 +9,7 @@ import { cabinetMasterQueries, cabinetMasterMutations } from './cabinetMaster';
 import { folderMasterQueries, folderMasterMutations } from './folderMaster';
 import { subFolderMappingQueries, subFolderMappingMutations } from './subFolderMapping';
 import { userQueries, userMutations } from './users';
+import { subFolderMasterQueries, subFolderMasterMutations } from './subFolderMaster';
 
 const resolvers = {
   Upload: GraphQLUpload,
@@ -20,6 +21,7 @@ const resolvers = {
     ...roleQueries,
     ...cabinetMasterQueries,
     ...folderMasterQueries,
+    ...subFolderMasterQueries,
     ...subFolderMappingQueries,
     ...userQueries
   },
@@ -31,6 +33,7 @@ const resolvers = {
     ...roleMutations,
     ...cabinetMasterMutations,
     ...folderMasterMutations,
+    ...subFolderMasterMutations,
     ...subFolderMappingMutations,
     ...userMutations
   },

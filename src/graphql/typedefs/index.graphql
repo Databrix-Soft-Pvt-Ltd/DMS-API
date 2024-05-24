@@ -2,10 +2,17 @@ scalar Upload
 
 type Query {
   getAllTemplates(id: ID, is_active: Boolean): [all_templates]
+  getActiveTemplates(id: ID): [all_templates]
   getAllForms(template_id: ID): [get_all_forms]
   getAllRoles(role_id: ID): [all_roles]
   getCabinet(id: ID): [cabinet_master]
   getFolder(id: ID): [folder_master]
+  getSubFolder(id: ID): [sub_folder_master]
+
+  getFolderWithCabinet(id: ID): [folder_master_with_cabinet]
+  getFoldersInCabinet(cabinet_id: ID): [folder_master]
+  getSubFolderWithFolderAndCabinet(id: ID): [sub_folder_master_with_folder_and_cabinet]
+
   getAllSubFolderMappings(id: ID): [subFolderMapping]
   getSubFoldersOfUser(user_id: ID): [subFolderMapping]
 }
@@ -23,13 +30,17 @@ type Mutation {
   editForm(edit_form: add_forms): [String]
   deleteForm(form_id: Int): String
 
-  addCabinet(add_cabinet_master: add_cabinet_master): String
-  editCabinet(edit_cabinet_master: edit_cabinet_master): String
-  deleteCabinet(id: ID): String
+  addCabinet(add_cabinet_master: add_cabinet_master): MutationResponse
+  editCabinet(edit_cabinet_master: edit_cabinet_master): MutationResponse
+  deleteCabinet(id: ID): MutationResponse
 
-  addFolder(add_folder_master: add_folder_master): String
-  editFolder(edit_folder_master: edit_folder_master): String
-  deleteFolder(id: ID): String
+  addFolder(add_folder_master: add_folder_master): MutationResponse
+  editFolder(edit_folder_master: edit_folder_master): MutationResponse
+  deleteFolder(id: ID): MutationResponse
+
+  addSubFolder(add_sub_folder_master: add_sub_folder_master): MutationResponse
+  editSubFolder(edit_sub_folder_master: edit_sub_folder_master): MutationResponse
+  deleteSubFolder(id: ID): MutationResponse
 
   addSubFolderMapping(addSubFolderMapping: addSubFolderMapping): String
   deleteSubFolderMapping(deleteSubFolderMapping: deleteSubFolderMapping): String
