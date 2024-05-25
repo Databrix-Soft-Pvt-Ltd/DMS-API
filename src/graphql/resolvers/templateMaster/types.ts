@@ -1,15 +1,45 @@
-export interface add_template_master {
+export interface addTemplate {
     name: string;
-    page_id: number;
-    is_active: boolean;
-    is_deleted: boolean;
+    pageId: number;
+    description: number;
+    isActive: boolean;
+    isDeleted: boolean;
 }
 
-export interface edit_template_master extends add_template_master {
+export interface editTemplate extends addTemplate {
     id: number;
+    isActive: boolean;
 }
 
-export interface get_all_templates extends edit_template_master {
-    created_by: number;
-    created_date: string;
+export interface AllTemplateParam{
+    templateId: number;
+    isActive: boolean;
+    page: number;
+    size: number;
+    searchColumns: string;
+    searchParam: string;
+    orderAsc: string;
+    orderDesc: string;
+
 }
+export interface GetAllTemplates {
+    allTemplate: AllTemplates[];
+    page: Page;
+  }
+  
+  export  interface AllTemplates {
+    id: number;
+    name: string;
+    description: string;
+    isActive: boolean;
+    isDeleted: boolean;
+    createdBy: string;
+    createdDate: string;
+    totalCount: number;
+  }
+  
+  export  interface Page {
+    page: number | null;
+    size: number | null;
+    totalCount: number  | null;
+  }

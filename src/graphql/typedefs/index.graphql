@@ -1,10 +1,28 @@
 scalar Upload
 
 type Query {
-  getAllTemplates(id: ID, is_active: Boolean): [all_templates]
-  getActiveTemplates(id: ID): [all_templates]
+  getAllTemplates(
+    templateId: Int
+    isActive: Boolean
+    page: Int
+    size: Int
+    searchColumns: String
+    searchParam: String
+    orderAsc: String
+    orderDesc: String
+  ): GetAllTemplate
+  getActiveTemplates(id: ID): GetAllTemplate
   getAllForms(template_id: ID): [get_all_forms]
-  getAllRoles(role_id: ID): [all_roles]
+  getAllRoles(
+    roleId: Int
+    isActive: Boolean
+    page: Int
+    size: Int
+    searchColumns: String
+    searchParam: String
+    orderAsc: String
+    orderDesc: String
+  ): GetAllRoles
   getCabinet(id: ID): [cabinet_master]
   getFolder(id: ID): [folder_master]
   getSubFolder(id: ID): [sub_folder_master]
@@ -18,12 +36,12 @@ type Query {
 }
 
 type Mutation {
-  addTemplate(add_template: add_template): MutationResponse
-  editTemplate(id: Int, edit_template: add_template): MutationResponse
+  addTemplate(addTemplate: addTemplate): MutationResponse
+  editTemplate(id: Int, editTemplate: addTemplate): MutationResponse
   deleteTemplate(id: Int): MutationResponse
 
-  addRole(add_role: add_role): MutationResponse
-  editRole(id: Int, edit_role: add_role): MutationResponse
+  addRole(addRole: AddRole): MutationResponse
+  editRole(id: Int, editRole: AddRole): MutationResponse
   deleteRole(id: Int): MutationResponse
 
   addForm(add_forms: add_forms): String

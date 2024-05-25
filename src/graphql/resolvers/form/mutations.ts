@@ -4,14 +4,12 @@ import { formMaster } from './types';
 type MssqlError = import('msnodesqlv8/types').Error;
 
 const formQueries = {
-    addForm: async (_: undefined, { add_forms }: { add_forms: formMaster }): Promise<string> => {
-        console.log(add_forms)
-        const promises = add_forms.form_details.map(async (formDetail) => {
-            const { database_name, field_name, datatype, max_length } = formDetail;
+    addForm: async (_: undefined, { addForm }: { addForm: formMaster }): Promise<string> => {
+        const promises = addForm.formDetails.map(async (formDetail) => {
+            const { databaseName, fieldName, dataType, maxLength } = formDetail;
             try {
-                // console.log(1)
                 const rowss = await new Promise((resolve, reject) => {
-                    dbConnection.query('EXEC AddAndEditForm ?, ?, ?, ?, ?, ?', [database_name, field_name, datatype, max_length, add_forms.template_id, ''], (err, rows: any) => {
+                    dbConnection.query('EXEC AddAndEditForm ?, ?, ?, ?, ?, ?', [databaseName, fieldName, dataType, maxLength, addForm.templateId, ''], (err, rows: any) => {
                         if (err) {
                             reject(err);
                         } else {
@@ -26,7 +24,6 @@ const formQueries = {
         });
         try {
             const results = await Promise.all(promises);
-            // console.log('results', results); // Array of results for each form detail
         } catch (error) {
             console.error('Error processing form details:', error);
         }

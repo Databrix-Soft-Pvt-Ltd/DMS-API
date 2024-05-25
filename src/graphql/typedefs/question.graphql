@@ -17,11 +17,6 @@ type AllQuestions {
   page: Page
 }
 
-type Page {
-  limit: Int
-  page: Int
-  totalCount: Int
-}
 
 input Filters {
   eq: String

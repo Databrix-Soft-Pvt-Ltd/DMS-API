@@ -1,15 +1,44 @@
-export interface add_role {
-    role_name: string;
+export interface addRole {
+    roleName: string;
     description: string;
-    created_by: number;
+    createdBy: number;
 }
 
-export interface edit_role extends add_role {
+export interface editRole extends addRole {
     id: number;
+    isActive : Boolean;
 }
 
-export interface get_roles extends edit_role {
-    created_date: string;
-    is_active: boolean;
-    is_deleted: boolean;
+export interface GetAllRoles {
+    allRoles: AllRoles[];
+    page: Page;
+  }
+  
+  export  interface AllRoles {
+    id: number;
+    roleName: string;
+    description: string;
+    isActive: boolean;
+    isDeleted: boolean;
+    createdBy: string;
+    createdDate: string;
+    totalCount: number;
+  }
+  
+  export  interface Page {
+    page: number | null;
+    size: number | null;
+    totalCount: number  | null;
+  }
+
+export interface AllRolesParam{
+    roleId: number;
+    isActive: boolean;
+    page: number;
+    size: number;
+    searchColumns: string;
+    searchParam: string;
+    orderAsc: string;
+    orderDesc: string;
+
 }

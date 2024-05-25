@@ -1,15 +1,21 @@
-input add_template {
-    name: String
-    page_id: Int
-    created_by: Int
+input addTemplate {
+  name: String
+  description: String
+  pageId: Int
+  createdBy: Int
+  isActive: Boolean
 }
-
-type all_templates {
-    id: Int
-    name: String
-    page_id: Int
-    is_active: Boolean
-    is_deleted: Boolean
-    created_by: String
-    created_date: String
+type GetAllTemplate {
+  allTemplate: [AllTemplates]
+  page: Page
+}
+type AllTemplates {
+  id: Int
+  name: String
+  description: String
+  pageId: Int
+  isActive: Boolean
+  isDeleted: Boolean
+  createdBy: String
+  createdDate: String
 }

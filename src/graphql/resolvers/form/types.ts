@@ -1,22 +1,19 @@
 
-export type form_details = {
-    database_name: string;
-    field_name: string;
-    datatype: string;
-    max_length: number;
+export type formDetails = {
+    databaseName: string;
+    fieldName: string;
+    dataType: string;
+    maxLength: number;
 }
 
 export type formMaster = {
-    template_id: number;
-    form_details: form_details[];
+    templateId: number;
+    formDetails: formDetails[];
 }
 
 export type getAllForms = {
-    database_name: string;
-    field_name: string;
-    datatype: string;
-    template_id: number;
-    template_name: string;
-    form_id: number;
-    max_length: number;
+    databaseName: string;
+    fieldName: string;
+    dataType: string;
+    maxLength: number;
 }

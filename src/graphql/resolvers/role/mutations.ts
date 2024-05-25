@@ -1,16 +1,14 @@
 
 import { dbConnection } from '../../../db';
-import { add_role, edit_role } from './types';
+import { addRole, editRole } from './types';
 type MssqlError = import('msnodesqlv8/types').Error;
 
 const roleMutations = {
-    addRole: async (_: undefined, { add_role }: { add_role: add_role }): Promise<{ error: string | null, message: string | null }> => {
-
-        console.log('addRole', add_role)
-        const { role_name, description, created_by } = add_role
+    addRole: async (_: undefined, { addRole }: { addRole: addRole }): Promise<{ error: string | null, message: string | null }> => {
+        const { roleName, description, createdBy } = addRole
 
         const result: any = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC AddRole ?, ?, ?, ?', [role_name, description, created_by, ''], (err, rows) => {
+            dbConnection.query('EXEC AddRole ?, ?, ?, ?', [roleName, description, createdBy, ''], (err, rows) => {
                 if (err) {
                     reject(err); // Handle error more specifically if possible
                 } else {
@@ -33,9 +31,9 @@ const roleMutations = {
         }
     },
 
-    editRole: async (_: undefined, { id, edit_role }: { id: number, edit_role: edit_role }): Promise<{ error: string | null, message: string | null }> => {
+    editRole: async (_: undefined, { id, editRole }: { id: number, editRole: editRole }): Promise<{ error: string | null, message: string | null }> => {
         const result: any = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC EditRole ?, ?, ?, ?', [edit_role.role_name, edit_role.description, id ,''], (err, rows) => {
+            dbConnection.query('EXEC EditRole ?, ?, ?, ?, ?', [editRole.roleName || '', editRole.description || '', id || 0, editRole.isActive ? 1 : 0,''], (err, rows) => {
                 if (err) {
                     reject(err); // Handle error more specifically if possible
                 } else {
@@ -50,9 +48,12 @@ const roleMutations = {
             });
         });
         
-        if(result === 'Role Update Successfully'){
+        if(result === 'Role Updated Successfully'){
             return { error: null, message: result }
-        } else {
+            
+        } else if (result === 'Role Status Changed Successfully')
+            return { error: null, message: result } 
+        else {
             return { error: result, message: result }
         }
     },

@@ -1,12 +1,22 @@
 
 import { dbConnection } from '../../../db'
-import { get_all_templates } from './types'
+import { AllTemplateParam, AllTemplates, GetAllTemplates } from './types'
 
 const templateQueries = {
-    getAllTemplates: async (_: undefined, { id, is_active }: { id: number, is_active: boolean }): Promise<get_all_templates[]> => {
+    getAllTemplates: async (_: undefined, record: AllTemplateParam): Promise<GetAllTemplates> => {
         
-        const result: get_all_templates[] = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC GetTemplates ?', [id], (err, rows) => {
+        const result: AllTemplates[] = await new Promise((resolve, reject) => {
+            dbConnection.query('EXEC GetTemplates ?,?,?,?,?,?,?,?',
+            [
+              record.templateId || 0,
+              record.isActive || false,
+              record.page || 0,
+              record.size || 0,
+              record.searchColumns|| '',
+              record.searchParam || '',
+              record.orderAsc  || '',
+              record.orderDesc  || '',
+            ], (err, rows) => {
                 if (err) {
                     reject(err); // Handle error more specifically if possible
                 } else {
@@ -19,16 +29,12 @@ const templateQueries = {
             });
         });
 
-        result.forEach((item, index) => {
-            result[index].created_date = new Date(item.created_date).toISOString()
-        })
-
-        return result;
+        return result.length > 0 ? {allTemplate: result, page:  {page : record?.page || null, size: record?.size || null, totalCount : result[0].totalCount || 0}} : {allTemplate: result, page: {page : 0, size: 0, totalCount : 0}};
     },
 
-    getActiveTemplates: async (_: undefined): Promise<get_all_templates[]> => {
+    getActiveTemplates: async (_: undefined): Promise<any> => {
 
-        const result: get_all_templates[] = await new Promise((resolve, reject) => {
+        const result: any[] = await new Promise((resolve, reject) => {
             dbConnection.query('EXEC GetActiveTemplates', [], (err, rows) => {
                 if (err) {
                     reject(err); // Handle error more specifically if possible
