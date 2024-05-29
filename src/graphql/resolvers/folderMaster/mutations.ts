@@ -6,12 +6,12 @@ const mutations = {
     _: undefined,
     { add_folder_master }: { add_folder_master: addFolderMaster },
   ): Promise<{ error: string | null; message: string | null }> => {
-    const { folder, cabinet_id } = add_folder_master;
+    const { folder, cabinetId } = add_folder_master;
 
     const result: string = await new Promise((resolve, reject) => {
       dbConnection.query(
         'EXEC AddFolderMaster ?, ?, ?;',
-        [folder, cabinet_id, ''],
+        [folder, cabinetId, ''],
         (err, rows: any) => {
           if (err) reject(err);
 
@@ -32,10 +32,10 @@ const mutations = {
     _: undefined,
     { edit_folder_master }: { edit_folder_master: editFolderMaster },
   ): Promise<{ error: string | null; message: string | null }> => {
-    const { id, folder, cabinet_id } = edit_folder_master;
+    const { id, folder, cabinetId } = edit_folder_master;
 
     const result: string = await new Promise((resolve, reject) => {
-      dbConnection.query('EXEC EditFolderMaster ?, ?, ?, ?;', [id, folder, cabinet_id, ''], (err, rows: any) => {
+      dbConnection.query('EXEC EditFolderMaster ?, ?, ?, ?;', [id, folder, cabinetId, ''], (err, rows: any) => {
         if (err) reject(err);
 
         // console.log(rows)

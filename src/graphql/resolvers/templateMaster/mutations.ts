@@ -6,8 +6,9 @@ type MssqlError = import('msnodesqlv8/types').Error;
 const templateMutations = {
     addTemplate: async (_: undefined, { addTemplate }: { addTemplate: addTemplate }): Promise<{ error: string | null, message: string }> => {
 
+        console.log('add template', addTemplate)
         const result: any = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC AddTemplateMaster ?, ?, ?, ?', [addTemplate.name, addTemplate.pageId,addTemplate.description, ''], (err, rows) => {
+            dbConnection.query('EXEC AddTemplateMaster ?, ?, ?, ?', [addTemplate.name, addTemplate.pageId, addTemplate.description, ''], (err, rows) => {
                 if (err) {
                     reject(err); // Handle error more specifically if possible
                 } else {

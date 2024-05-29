@@ -1,20 +1,37 @@
 input add_cabinet_master {
     cabinet: String
-    is_active: Boolean
-    created_by: String
+    isActive: Boolean
+    createdBy: String
 }
 
 input edit_cabinet_master {
     id: Int!
     cabinet: String!
-    is_active: Boolean
-    created_by: String
+    isActive: Boolean
+    createdBy: String
 }
 
 type cabinet_master {
     id: Int
     cabinet: String
-    is_active: Boolean
-    created_by: String
-    created_date: String
+    isActive: Boolean
+    createdBy: String
+    createdDate: String
+}
+
+input addCabinet {
+  cabinet: String
+  createdBy: Int
+  isActive: Boolean
+}
+type GetAllCabinet {
+  allCabinet: [AllCabinet]
+  page: Page
+}
+type AllCabinet {
+  id: Int
+  cabinet: String
+  isActive: Boolean
+  createdBy: String
+  createdDate: String
 }

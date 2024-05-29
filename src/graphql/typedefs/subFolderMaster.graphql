@@ -1,30 +1,46 @@
 input add_sub_folder_master {
-    sub_folder: String!
-    folder_id: Int!
-    created_by: Int
+    subFolder: String!
+    folderId: Int!
+    createdBy: Int
 }
 
 input edit_sub_folder_master {
     id: Int!
-    sub_folder: String
-    folder_id: Int
+    subFolder: String
+    folderId: Int
 }
 
 type sub_folder_master {
     id: Int
-    sub_folder: String
-    folder_id: Int
-    created_by: Int
-    created_date: String
+    subFolder: String
+    folderId: Int
+    createdBy: Int
+    createdDate: String
 }
 
 type sub_folder_master_with_folder_and_cabinet {
     id: Int
-    sub_folder: String
-    folder_id: Int
+    subFolder: String
+    folderId: Int
     folder: String
-    cabinet_id: Int
+    cabinetId: Int
     cabinet: String
-    created_by: Int
-    created_date: String
+    createdBy: Int
+    createdDate: String
+}
+
+type GetAllSubFolder {
+    allSubFolder: [AllSubFolder]
+    page: Page
+}
+type AllSubFolder {
+    id: Int
+    isActive: Boolean
+    subFolder: String
+    folderId: Int
+    folder: String
+    cabinet: String
+    cabinetId: Int
+    createdBy: String
+    createdDate: String
 }

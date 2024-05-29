@@ -1,6 +1,6 @@
 export interface addSubFolderMaster {
-    sub_folder: string,
-    folder_id: number
+    subFolder: string,
+    folderId: number
 }
 
 export interface editSubFolderMaster extends addSubFolderMaster {
@@ -9,18 +9,54 @@ export interface editSubFolderMaster extends addSubFolderMaster {
 
 export interface subFolderMaster {
     id: number
-    sub_folder: string
-    folder_id: number
-    created_by: number
-    created_date: String
+    subFolder: string
+    folderId: number
+    createdBy: number
+    createdDate: String
 }
 
 export interface subFolderMasterWithFolderAndCabinet extends subFolderMaster {
     folder: string
-    cabinet_id: number
+    cabinetId: number
     cabinet: string
 }
 
 export interface deleteSubFolderMaster {
     id: number
 }
+
+export interface AllSubFolderParam {
+    subFolderId: number;
+    isActive: boolean;
+    page: number;
+    size: number;
+    searchColumns: string;
+    searchParam: string;
+    orderAsc: string;
+    orderDesc: string;
+  }
+  
+  export interface GetAllSubFolders {
+    allSubFolder: AllSubFolders[];
+    page: Page;
+  }
+  
+  export interface AllSubFolders {
+    id: number;
+    subFolder: String;
+    folderId: number;
+    folder: string;
+    cabinetId: number;
+    cabinet: string;
+    isActive: boolean;
+    createdBy: string;
+    createdDate: string;
+    totalCount: number;
+  }
+  
+  export interface Page {
+    page: number | null;
+    size: number | null;
+    totalCount: number | null;
+  }
+  

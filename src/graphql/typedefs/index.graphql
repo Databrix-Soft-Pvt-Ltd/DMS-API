@@ -23,12 +23,44 @@ type Query {
     orderAsc: String
     orderDesc: String
   ): GetAllRoles
+  getAllCabinets(
+    cabinetId: Int
+    isActive: Boolean
+    page: Int
+    size: Int
+    searchColumns: String
+    searchParam: String
+    orderAsc: String
+    orderDesc: String
+  ): GetAllCabinet
   getCabinet(id: ID): [cabinet_master]
+
+  getAllFolders(
+    folderId: Int
+    isActive: Boolean
+    page: Int
+    size: Int
+    searchColumns: String
+    searchParam: String
+    orderAsc: String
+    orderDesc: String
+  ): GetAllFolder
   getFolder(id: ID): [folder_master]
+
+  getAllSubFolders(
+    subFolderId: Int
+    isActive: Boolean
+    page: Int
+    size: Int
+    searchColumns: String
+    searchParam: String
+    orderAsc: String
+    orderDesc: String
+  ): GetAllSubFolder
   getSubFolder(id: ID): [sub_folder_master]
 
   getFolderWithCabinet(id: ID): [folder_master_with_cabinet]
-  getFoldersInCabinet(cabinet_id: ID): [folder_master]
+  getFoldersInCabinet(cabinetId: ID): [folder_master]
   getSubFolderWithFolderAndCabinet(id: ID): [sub_folder_master_with_folder_and_cabinet]
 
   getAllSubFolderMappings(id: ID): [subFolderMapping]

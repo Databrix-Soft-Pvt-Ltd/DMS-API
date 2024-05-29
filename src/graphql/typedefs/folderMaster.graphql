@@ -1,28 +1,42 @@
 input add_folder_master {
     folder: String!
-    cabinet_id: Int!
-    created_by: Int
+    cabinetId: Int!
+    createdBy: Int
 }
 
 input edit_folder_master {
     id: Int!
     folder: String
-    cabinet_id: Int
+    cabinetId: Int
 }
 
 type folder_master {
     id: Int
     folder: String
-    cabinet_id: Int
-    created_by: Int
-    created_date: String
+    cabinetId: Int
+    createdBy: Int
+    createdDate: String
 }
 
 type folder_master_with_cabinet {
     id: Int
     folder: String
-    cabinet_id: Int
+    cabinetId: Int
     cabinet: String
-    created_by: Int
-    created_date: String
+    createdBy: Int
+    createdDate: String
+}
+
+type GetAllFolder {
+    allFolder: [AllFolder]
+    page: Page
+}
+type AllFolder {
+    id: Int
+    folder: String
+    isActive: Boolean
+    cabinet: String
+    cabinetId: Int
+    createdBy: String
+    createdDate: String
 }
