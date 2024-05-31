@@ -24,3 +24,14 @@ export interface authStatus {
     message: string | null
 }
 
+export interface user {
+    userId: number;
+    username: string;
+    emailId: string
+    templateId: number;
+    createdBy: number;
+    createdDate: string;
+    roleId: number;
+    userType: string;
+}
+

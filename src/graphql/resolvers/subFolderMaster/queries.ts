@@ -13,7 +13,7 @@ const queries = {
       dbConnection.query('EXEC GetSubFolderMaster ?', [id], (err, rows: any) => {
         if (err) reject(err);
 
-        console.log(rows);
+        // console.log(rows);
         resolve(rows);
       });
     });
@@ -32,7 +32,7 @@ const queries = {
         (err, rows: any) => {
           if (err) reject(err);
 
-          console.log(rows);
+          // console.log(rows);
           resolve(rows);
         },
       );
@@ -41,7 +41,6 @@ const queries = {
     return result;
   },
   getAllSubFolders: async (_: undefined, record: AllSubFolderParam): Promise<GetAllSubFolders> => {
-    console.log('query was hit', record)
     const result: AllSubFolders[] = await new Promise((resolve, reject) => {
       dbConnection.query(
         'EXEC GetSubFolders ?,?,?,?,?,?,?,?',
@@ -59,8 +58,6 @@ const queries = {
           if (err) {
             reject(err);
           } else {
-            console.log('rows length', rows?.length);
-            console.log('row', rows && rows[0])
             if (rows && rows.length > 0) {
               resolve(rows);
             } else {

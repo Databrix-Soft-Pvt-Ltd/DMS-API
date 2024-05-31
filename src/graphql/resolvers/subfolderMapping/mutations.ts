@@ -2,17 +2,17 @@ import { dbConnection } from "../../../db"
 import { addSubFolderMapping, deleteSubFolderMapping } from "./types"
 
 const mutations = {
-    addSubFolderMapping: async (_: undefined, { addSubFolderMapping }: { addSubFolderMapping: addSubFolderMapping } ) : Promise<string> => {
+    addSubFolderMapping: async (_: undefined, { addSubFolderMapping }: { addSubFolderMapping: addSubFolderMapping } ) : Promise<{ error: string | null, message: string | null }> => {
 
-        const { user_id, subfolder_id } = addSubFolderMapping
-        console.log('add sub folder mapping', addSubFolderMapping)
+        const { userId, subFolderIds, createdBy } = addSubFolderMapping
 
         const result: string = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC AddSubFolderMapping ?, ?, ?', [user_id, subfolder_id, ''], (err: any, res: any) => {
+            dbConnection.query('EXEC AddSubFolderMapping @userid = ?, @subFolderIds = ?, @createdBy = ?, @outputMessage = ?', 
+                [userId, subFolderIds, createdBy, ''], (err: any, res: any) => {
                 if(err){
                     reject(err)
                 }
-                console.log(res)
+                // console.log(res)
                 try{
                     resolve(res[0]?.outputMessage)
                 } catch {
@@ -20,20 +20,24 @@ const mutations = {
                 }
             })
         })
-        return result
+        if(result === 'Sub Folder Mapping Added Successfully'){
+            return { error: null, message: result }
+        } else {
+            return { error: result, message: result }
+        }
     },
 
     deleteSubFolderMapping: async (_:undefined, { deleteSubfolderMapping }: { deleteSubfolderMapping: deleteSubFolderMapping }): Promise<string> => {
 
-        const { id, user_id, subfolder_id } = deleteSubfolderMapping
+        const { id, userId, subFolderId } = deleteSubfolderMapping
 
         const result: string = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC DeleteSubFolderMapping ?, ?, ?, ?', [id, user_id, subfolder_id, ''], (err: any, res: any) => {
+            dbConnection.query('EXEC DeleteSubFolderMapping ?, ?, ?, ?', [id, userId, subFolderId, ''], (err: any, res: any) => {
                 if(err){
                     reject(err)
                 }
                 else{
-                    console.log(res)
+                    // console.log(res)
                     resolve(res[0]?.outputMessage)
                 }
             })

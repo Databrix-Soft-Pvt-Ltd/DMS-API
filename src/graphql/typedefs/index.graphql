@@ -64,7 +64,9 @@ type Query {
   getSubFolderWithFolderAndCabinet(id: ID): [sub_folder_master_with_folder_and_cabinet]
 
   getAllSubFolderMappings(id: ID): [subFolderMapping]
-  getSubFoldersOfUser(user_id: ID): [subFolderMapping]
+  getSubFoldersOfUser(userId: ID): [subFolderMapping]
+
+  getAllUsers(userId: ID): [user]
 }
 
 type Mutation {
@@ -92,7 +94,7 @@ type Mutation {
   editSubFolder(edit_sub_folder_master: edit_sub_folder_master): MutationResponse
   deleteSubFolder(id: ID): MutationResponse
 
-  addSubFolderMapping(addSubFolderMapping: addSubFolderMapping): String
+  addSubFolderMapping(addSubFolderMapping: addSubFolderMapping): MutationResponse
   deleteSubFolderMapping(deleteSubFolderMapping: deleteSubFolderMapping): String
 
   login(loginCredentials: loginCredentials): authStatus

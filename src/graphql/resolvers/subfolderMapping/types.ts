@@ -1,10 +1,15 @@
 export interface addSubFolderMapping {
-    user_id: number,
-    subfolder_id: number
+    userId: number,
+    subFolderIds: string,
+    createdBy: number,
 }
 
-export interface subFolderMapping extends addSubFolderMapping {
+export interface subFolderMapping {
     id: number
+    userId: number
+    subFolderId: number,
+    createdBy: number,
+    createdDate: string
 }
 
 export interface deleteSubFolderMapping extends subFolderMapping {}

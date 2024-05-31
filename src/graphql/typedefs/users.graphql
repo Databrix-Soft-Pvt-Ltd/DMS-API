@@ -17,3 +17,14 @@ type authStatus {
     token: String
     message: String
 }
+
+type user {
+    userId: Int
+    username: String
+    emailId: String
+    templateId: Int
+    createdBy: Int
+    createdDate: String
+    roleId: Int
+    userType: String
+}

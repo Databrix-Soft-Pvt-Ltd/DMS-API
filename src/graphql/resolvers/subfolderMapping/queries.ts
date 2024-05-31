@@ -15,9 +15,10 @@ const queries = {
         return result
     },
 
-    getSubFoldersOfUser: async (_: undefined, { user_id }: { user_id: number }): Promise<subFolderMapping[]> => {
+    getSubFoldersOfUser: async (_: undefined, { userId }: { userId: number }): Promise<subFolderMapping[]> => {
+
         const result: subFolderMapping[] = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC getAllSubFoldersOfUser ?', [user_id], (err, res: any) => {
+            dbConnection.query('EXEC GetAllSubFolderOfUser ?', [userId], (err, res: any) => {
                 if(err) {
                     reject(err)
                 }

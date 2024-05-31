@@ -1,16 +1,19 @@
 type subFolderMapping {
     id: Int
-    user_id: Int
-    sub_folder_id: Int
+    userId: Int
+    subFolderId: Int
+    createdBy: Int
+    createdDate: String
 }
 
 input addSubFolderMapping {
-    user_id: Int!
-    sub_folder_id: Int!
+    userId: Int!
+    subFolderIds: String!
+    createdBy: Int
 }
 
 input deleteSubFolderMapping {
     id: Int
-    user_id: Int
-    sub_folder_id: Int
+    userId: Int
+    subFolderId: Int
 }
