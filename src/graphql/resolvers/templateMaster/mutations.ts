@@ -1,6 +1,6 @@
 
 import { dbConnection } from '../../../db';
-import { addTemplate } from './types';
+import { AddRequiredFields, addTemplate } from './types';
 type MssqlError = import('msnodesqlv8/types').Error;
 
 const templateMutations = {
@@ -75,6 +75,27 @@ const templateMutations = {
         });
 
         if(result === 'Template Master Deleted Successfully'){
+            return { error: null, message: result }
+        } else {
+            return { error: result, message: result }
+        }
+    },
+
+    addRequiredFields: async (_: undefined, { AddRequiredFields }: { AddRequiredFields: AddRequiredFields }): Promise<{ error: string | null, message: string }> => {
+        
+        const { pageId, requiredFields } = AddRequiredFields
+        console.log('pageId, requiredFields', pageId, requiredFields)
+        const result: string = await new Promise((resolve, reject) => {
+            dbConnection.query('EXEC AddRequiredFields ?, ?, ?', [pageId, requiredFields, ''], (err, rows: any) => {
+                if(err) {
+                    reject(err)
+                } else {
+                    resolve(rows[0]?.outputMessage)
+                }
+            })
+        })
+
+        if(result === 'Required Fields Added Successfully'){
             return { error: null, message: result }
         } else {
             return { error: result, message: result }

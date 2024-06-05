@@ -1,8 +1,10 @@
+import { RequiredField } from 'aws-sdk/clients/connectcases';
 import { dbConnection } from '../../../db';
-import { AllTemplateParam, AllTemplates, GetAllTemplates } from './types';
+import { AllTemplateParam, AllTemplates, GetAllTemplates, RequiredFields } from './types';
 
 const templateQueries = {
   getAllTemplates: async (_: undefined, record: AllTemplateParam): Promise<GetAllTemplates> => {
+
     const result: AllTemplates[] = await new Promise((resolve, reject) => {
       dbConnection.query(
         'EXEC GetTemplates ?,?,?,?,?,?,?,?',
@@ -66,6 +68,22 @@ const templateQueries = {
 
     return result;
   },
+  getRequiredFields: async (_: undefined, { pageId }: { pageId: number }): Promise<RequiredFields[]> => {
+
+    console.log('required fields asked', pageId)
+    const result: RequiredFields[] = await new Promise((resolve, reject) => {
+      dbConnection.query('EXEC GetRequiredFields @pageId=?', [pageId], (err, rows: any) => {
+        if(err) {
+          reject(err)
+        } else {
+          resolve(rows)
+        }
+      })
+    })
+    console.log('result of required fields', result)
+
+    return result
+  }
 };
 
 export default templateQueries;

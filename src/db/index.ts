@@ -1,5 +1,5 @@
 import sql from 'msnodesqlv8';
-import { Connection } from 'msnodesqlv8/types';
+import { Connection, } from 'msnodesqlv8/types';
 
 // ODBC connection string for SQL Server
 const connectionString = process.env.SSMS_CREDENCIAL || '';

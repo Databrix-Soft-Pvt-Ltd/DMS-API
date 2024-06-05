@@ -27,17 +27,16 @@ const formQueries = {
         } catch (error) {
             console.error('Error processing form details:', error);
         }
-        
 
         return "Record Added Successfully"
     },
     
-    deleteForm: async (_: undefined, { form_id }: { form_id: number }): Promise<string> => {
+    deleteForm: async (_: undefined, { formId }: { formId: number }): Promise<string> => {
 
-        // console.log('form id', form_id) #Solved
+        // console.log('form id', formId) #Solved
 
         const result: string = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC DeleteForm ?,?', [form_id, ''], (err, result: any) => {
+            dbConnection.query('EXEC DeleteForm ?,?', [formId, ''], (err, result: any) => {
                 if(err){
                     reject(err)
                 } else {

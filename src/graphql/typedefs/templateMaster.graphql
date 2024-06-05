@@ -19,3 +19,14 @@ type AllTemplates {
   createdBy: String
   createdDate: String
 }
+
+input AddRequiredFields {
+  pageId: Int
+  requiredFields: String
+}
+
+type RequiredFields {
+  id: Int
+  pageId: Int
+  field: String
+}

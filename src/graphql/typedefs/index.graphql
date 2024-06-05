@@ -10,9 +10,12 @@ type Query {
     searchParam: String
     orderAsc: String
     orderDesc: String
+    createdDate: String
   ): GetAllTemplate
   getActiveTemplates(id: ID): GetAllTemplate
   getAllForms(template_id: ID): [get_all_forms]
+  getRequiredFields(pageId: ID): [RequiredFields]
+
   getAllRoles(
     roleId: Int
     isActive: Boolean
@@ -22,6 +25,7 @@ type Query {
     searchParam: String
     orderAsc: String
     orderDesc: String
+    createdDate: String
   ): GetAllRoles
   getAllCabinets(
     cabinetId: Int
@@ -74,13 +78,15 @@ type Mutation {
   editTemplate(id: Int, editTemplate: addTemplate): MutationResponse
   deleteTemplate(id: Int): MutationResponse
 
+  addRequiredFields(AddRequiredFields: AddRequiredFields): MutationResponse
+
   addRole(addRole: AddRole): MutationResponse
   editRole(id: Int, editRole: AddRole): MutationResponse
   deleteRole(id: Int): MutationResponse
 
-  addForm(add_forms: add_forms): String
-  editForm(edit_form: add_forms): [String]
-  deleteForm(form_id: Int): String
+  addForm(add_forms: add_forms): MutationResponse
+  # editForm(edit_form: add_forms): [String]
+  deleteForm(form_id: Int): MutationResponse
 
   addCabinet(add_cabinet_master: add_cabinet_master): MutationResponse
   editCabinet(edit_cabinet_master: edit_cabinet_master): MutationResponse

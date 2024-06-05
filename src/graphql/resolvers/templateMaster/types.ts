@@ -43,3 +43,14 @@ export interface Page {
   size: number | null;
   totalCount: number | null;
 }
+
+export interface RequiredFields {
+  id: number;
+  pageId: number;
+  field: string;
+}
+
+export interface AddRequiredFields {
+  pageId: number;
+  requiredFields: string;
+}
