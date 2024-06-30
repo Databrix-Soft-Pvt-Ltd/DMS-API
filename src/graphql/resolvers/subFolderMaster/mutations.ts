@@ -35,12 +35,16 @@ const mutations = {
     const { id, subFolder, folderId } = edit_sub_folder_master;
 
     const result: string = await new Promise((resolve, reject) => {
-      dbConnection.query('EXEC EditSubFolderMaster ?, ?, ?, ?;', [id, subFolder, folderId, ''], (err, rows: any) => {
-        if (err) reject(err);
+      dbConnection.query(
+        'EXEC EditSubFolderMaster ?, ?, ?, ?;',
+        [id, subFolder, folderId, ''],
+        (err, rows: any) => {
+          if (err) reject(err);
 
-        // console.log(rows)
-        resolve(rows[0]?.outputMessage);
-      });
+          // console.log(rows)
+          resolve(rows[0]?.outputMessage);
+        },
+      );
     });
 
     if (result === 'Sub Folder Edited Successfully') {
@@ -63,10 +67,35 @@ const mutations = {
       });
     });
 
-    if(result === 'Sub Folder Deleted Successfully'){
-        return { error: null, message: result }
+    if (result === 'Sub Folder Deleted Successfully') {
+      return { error: null, message: result };
     } else {
-        return { error: result, message: result }
+      return { error: result, message: result };
+    }
+  },
+
+  changeActiveStatusOfSubFolder: async (
+    _: undefined,
+    { id, isActive }: { id: number; isActive: boolean },
+  ): Promise<{ error: string | null; message: string }> => {
+    const result: string = await new Promise((resolve, reject) => {
+      dbConnection.query(
+        'ChangeActiveStatusOfSubFolder @id=?, @isActive=?, @outputMessage=?',
+        [id, isActive, ''],
+        (err, rows: any) => {
+          if (err) {
+            reject(err);
+          }
+
+          resolve(rows[0].outputMessage);
+        },
+      );
+    });
+
+    if (result === 'Status Changed Successfully') {
+      return { error: null, message: result };
+    } else {
+      return { error: result, message: result };
     }
   },
 };
