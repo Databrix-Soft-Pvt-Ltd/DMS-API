@@ -78,7 +78,9 @@ type Mutation {
   editTemplate(id: Int, editTemplate: addTemplate): MutationResponse
   deleteTemplate(id: Int): MutationResponse
 
-  addRequiredFields(AddRequiredFields: AddRequiredFields): MutationResponse
+  addRequiredFields(AddRequiredFields: RequiredFieldsInput): MutationResponse
+  editRequiredFields(EditRequiredFields: RequiredFieldsInput): MutationResponse
+  deleteRequiredFields(pageId: Int): MutationResponse
 
   addRole(addRole: AddRole): MutationResponse
   editRole(id: Int, editRole: AddRole): MutationResponse

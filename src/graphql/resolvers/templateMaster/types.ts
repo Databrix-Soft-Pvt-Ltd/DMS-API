@@ -50,7 +50,7 @@ export interface RequiredFields {
   field: string;
 }
 
-export interface AddRequiredFields {
+export interface RequiredFieldsInput {
   pageId: number;
   requiredFields: string;
 }

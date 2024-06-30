@@ -4,6 +4,7 @@ import { AllTemplateParam, AllTemplates, GetAllTemplates, RequiredFields } from 
 
 const templateQueries = {
   getAllTemplates: async (_: undefined, record: AllTemplateParam): Promise<GetAllTemplates> => {
+    console.log('get all templates', record)
 
     const result: AllTemplates[] = await new Promise((resolve, reject) => {
       dbConnection.query(
@@ -80,7 +81,6 @@ const templateQueries = {
         }
       })
     })
-    console.log('result of required fields', result)
 
     return result
   }

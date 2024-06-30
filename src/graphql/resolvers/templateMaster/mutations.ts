@@ -1,6 +1,6 @@
 
 import { dbConnection } from '../../../db';
-import { AddRequiredFields, addTemplate } from './types';
+import { RequiredFieldsInput, addTemplate } from './types';
 type MssqlError = import('msnodesqlv8/types').Error;
 
 const templateMutations = {
@@ -81,12 +81,32 @@ const templateMutations = {
         }
     },
 
-    addRequiredFields: async (_: undefined, { AddRequiredFields }: { AddRequiredFields: AddRequiredFields }): Promise<{ error: string | null, message: string }> => {
-        
+    addRequiredFields: async (_: undefined, { AddRequiredFields } : { AddRequiredFields: RequiredFieldsInput }): Promise<{ error: string | null, message: string }> => {
+
         const { pageId, requiredFields } = AddRequiredFields
+        const result: string = await new Promise((resolve, reject) => {
+            dbConnection.query('EXEC AddRequiredFields @pageId=?, @requiredFields=?, @outputMessage=?', [pageId, requiredFields, ''], (err, rows: any) => {
+                if(err){
+                    reject(err)
+                } else {
+                    resolve(rows[0]?.outputMessage)
+                }
+            })
+        })
+
+        if(result === 'Required Fields Added Successfully') {
+            return { error: null, message: result }
+        } else {
+            return { error: result, message: result }
+        }
+    },
+
+    editRequiredFields: async (_: undefined, { EditRequiredFields }: { EditRequiredFields: RequiredFieldsInput }): Promise<{ error: string | null, message: string }> => {
+        
+        const { pageId, requiredFields } = EditRequiredFields
         console.log('pageId, requiredFields', pageId, requiredFields)
         const result: string = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC AddRequiredFields ?, ?, ?', [pageId, requiredFields, ''], (err, rows: any) => {
+            dbConnection.query('EXEC EditRequiredFields @pageId=?, @requiredFields=?, @outputMessage=?', [pageId, requiredFields, ''], (err, rows: any) => {
                 if(err) {
                     reject(err)
                 } else {
@@ -95,7 +115,25 @@ const templateMutations = {
             })
         })
 
-        if(result === 'Required Fields Added Successfully'){
+        if(result === 'Required Fields Edited Successfully'){
+            return { error: null, message: result }
+        } else {
+            return { error: result, message: result }
+        }
+    }, 
+
+    deleteRequiredFields: async (_: undefined, { pageId }: { pageId: number }): Promise<{ error: string | null, message: string }> => {
+        const result: string = await new Promise((resolve, reject) => {
+            dbConnection.query('EXEC DeleteRequiredFieldsUsingPageId @pageId=?', [pageId], (err, rows: any) => {
+                if(err){
+                    reject(err)
+                } else {
+                    resolve(rows[0].outputMessage)
+                }
+            })
+        })
+
+        if(result === 'Required Fields Deleted Successfully'){
             return { error: null, message: result }
         } else {
             return { error: result, message: result }

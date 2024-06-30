@@ -20,7 +20,7 @@ type AllTemplates {
   createdDate: String
 }
 
-input AddRequiredFields {
+input RequiredFieldsInput {
   pageId: Int
   requiredFields: String
 }
