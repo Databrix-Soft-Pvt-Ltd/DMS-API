@@ -1,12 +1,12 @@
 import { RequiredField } from 'aws-sdk/clients/connectcases';
 import { dbConnection } from '../../../db';
-import { AllTemplateParam, AllTemplates, GetAllTemplates, RequiredFields } from './types';
+import { AllTemplateParam, AllTemplates, AllTemplatesWithTotalCount, GetAllTemplates, RequiredFields } from './types';
 
 const templateQueries = {
   getAllTemplates: async (_: undefined, record: AllTemplateParam): Promise<GetAllTemplates> => {
-    console.log('get all templates', record)
+    // console.log('get all templates', record)
 
-    const result: AllTemplates[] = await new Promise((resolve, reject) => {
+    const result: AllTemplatesWithTotalCount[] = await new Promise((resolve, reject) => {
       dbConnection.query(
         'EXEC GetTemplates ?,?,?,?,?,?,?,?',
         [
@@ -42,14 +42,36 @@ const templateQueries = {
             totalCount: result[0].totalCount || 0,
           },
         }
-      : { 
-            allTemplate: result, 
-            page: { page: 0, size: 0, totalCount: 0 } 
+      : {
+          allTemplate: result,
+          page: { page: 0, size: 0, totalCount: 0 },
         };
   },
 
-  getActiveTemplates: async (_: undefined): Promise<any> => {
-    const result: any[] = await new Promise((resolve, reject) => {
+  getAllFreshTemplates: async(_: undefined): Promise<AllTemplates[]> => {
+    const result: AllTemplates[] = await new Promise((resolve, reject) => {
+      dbConnection.query('EXEC GetAllFreshTemplates', [], (err, rows) => {
+        if (err) {
+          reject(err); // Handle error more specifically if possible
+        } else {
+          if (rows && rows.length > 0) {
+            resolve(rows);
+          } else {
+            reject(new Error('No rows returned from the stored procedure.'));
+          }
+        }
+      });
+    });
+
+    result.forEach((item, index) => {
+      result[index].createdDate = new Date(item.createdDate).toISOString();
+    });
+
+    return result;
+  },
+
+  getActiveTemplates: async (_: undefined): Promise<AllTemplates[]> => {
+    const result: AllTemplates[] = await new Promise((resolve, reject) => {
       dbConnection.query('EXEC GetActiveTemplates', [], (err, rows) => {
         if (err) {
           reject(err); // Handle error more specifically if possible
@@ -69,21 +91,40 @@ const templateQueries = {
 
     return result;
   },
-  getRequiredFields: async (_: undefined, { pageId }: { pageId: number }): Promise<RequiredFields[]> => {
-
-    console.log('required fields asked', pageId)
+  getRequiredFieldsByPageId: async (
+    _: undefined,
+    { pageId }: { pageId: number },
+  ): Promise<RequiredFields[]> => {
+    // console.log('required fields asked', pageId)
     const result: RequiredFields[] = await new Promise((resolve, reject) => {
-      dbConnection.query('EXEC GetRequiredFields @pageId=?', [pageId], (err, rows: any) => {
-        if(err) {
-          reject(err)
+      dbConnection.query('EXEC GetRequiredFieldsByPageId @pageId=?', [pageId], (err, rows: any) => {
+        if (err) {
+          reject(err);
         } else {
-          resolve(rows)
+          resolve(rows);
         }
-      })
-    })
+      });
+    });
 
-    return result
-  }
+    return result;
+  },
+  getRequiredFieldsByTemplateId: async (
+    _: undefined,
+    { templateId }: { templateId: number },
+  ): Promise<RequiredFields[]> => {
+    // console.log('required fields asked', pageId)
+    const result: RequiredFields[] = await new Promise((resolve, reject) => {
+      dbConnection.query('EXEC GetRequiredFieldsByTemplateId @templateId=?', [templateId], (err, rows: any) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(rows);
+        }
+      });
+    });
+
+    return result;
+  },
 };
 
 export default templateQueries;

@@ -12,7 +12,7 @@ const roleMutations = {
                 if (err) {
                     reject(err); // Handle error more specifically if possible
                 } else {
-                    console.log(rows)
+                    // console.log(rows)
                     // Check if there are any rows returned
                     if (rows && rows.length > 0) {
                         const message = rows[0].outputMessage; // Extract the output parameter value

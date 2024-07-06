@@ -29,7 +29,7 @@ const roleQueries = {
         },
       );
     });
-    console.log(result.length > 0 ? {allRoles: result, page:  {page : record?.page || null, size: record?.size || null, totalCount : result[0].totalCount || 0}} : {allRoles: result, page: {page : 0, size: 0, totalCount : 0}})
+    // console.log(result.length > 0 ? {allRoles: result, page:  {page : record?.page || null, size: record?.size || null, totalCount : result[0].totalCount || 0}} : {allRoles: result, page: {page : 0, size: 0, totalCount : 0}})
     return result.length > 0 ? {allRoles: result, page:  {page : record?.page || null, size: record?.size || null, totalCount : result[0].totalCount || 0}} : {allRoles: result, page: {page : 0, size: 0, totalCount : 0}};
   },
 };

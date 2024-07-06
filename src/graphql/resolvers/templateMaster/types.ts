@@ -23,7 +23,7 @@ export interface AllTemplateParam {
 }
 
 export interface GetAllTemplates {
-  allTemplate: AllTemplates[];
+  allTemplate: AllTemplatesWithTotalCount[];
   page: Page;
 }
 
@@ -35,6 +35,9 @@ export interface AllTemplates {
   isDeleted: boolean;
   createdBy: string;
   createdDate: string;
+}
+
+export interface AllTemplatesWithTotalCount extends AllTemplates{
   totalCount: number;
 }
 

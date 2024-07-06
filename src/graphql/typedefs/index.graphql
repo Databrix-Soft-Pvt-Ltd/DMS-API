@@ -13,8 +13,20 @@ type Query {
     createdDate: String
   ): GetAllTemplate
   getActiveTemplates(id: ID): GetAllTemplate
-  getAllForms(template_id: ID): [get_all_forms]
-  getRequiredFields(pageId: ID): [RequiredFields]
+  getAllFreshTemplates(id: ID): [AllTemplates]
+
+  getAllForms(
+    templateId: Int
+    isActive: Boolean
+    page: Int
+    size: Int
+    searchColumns: String
+    searchParam: String
+    orderAsc: String
+    orderDesc: String
+  ): GetAllForms
+  getRequiredFieldsByPageId(pageId: ID): [RequiredFields]
+  getRequiredFieldsByTemplateId(templateId: ID): [RequiredFields]
 
   getAllRoles(
     roleId: Int
@@ -86,9 +98,10 @@ type Mutation {
   editRole(id: Int, editRole: AddRole): MutationResponse
   deleteRole(id: Int): MutationResponse
 
-  addForm(add_forms: add_forms): MutationResponse
-  # editForm(edit_form: add_forms): [String]
-  deleteForm(form_id: Int): MutationResponse
+  addForm(addForm: AddForms): MutationResponse
+  editForm(editForm: EditForms): MutationResponse
+  deleteForm(formId: Int): MutationResponse
+  changeActiveStatusOfForm(id: ID, isActive: Boolean): MutationResponse
 
   addCabinet(add_cabinet_master: add_cabinet_master): MutationResponse
   editCabinet(edit_cabinet_master: edit_cabinet_master): MutationResponse

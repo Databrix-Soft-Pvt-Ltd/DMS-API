@@ -1,22 +1,44 @@
 
-input add_form_details {
+input AddFormDetails {
     databaseName: String
     fieldName: String
     dataType: String
     maxLength: Int
 }
 
-input add_forms {
+input AddForms {
     templateId: Int
-    formDetails: [add_form_details]
+    formDetails: [AddFormDetails]
 }
 
-type get_all_forms {
+input EditFormDetails {
+    id: Int
     databaseName: String
     fieldName: String
     dataType: String
-    templateId: Int
-    template_name: String
-    formId: Int
     maxLength: Int
+}
+
+input EditForms {
+    templateId: Int
+    formDetails: [EditFormDetails]
+}
+
+type AllForms {
+    id: Int
+    databaseName: String
+    fieldName: String
+    dataType: String
+    maxLength: String
+    templateId: Int
+    templateName: String
+    isActive: Boolean
+    isDeleted: Boolean
+    createdBy: String
+    createdDate: String
+}
+
+type GetAllForms {
+    allForms: [AllForms]
+    page: Page
 }
