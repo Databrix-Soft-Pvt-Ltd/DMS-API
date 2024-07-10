@@ -12,7 +12,8 @@ export interface subFolderMaster {
     subFolder: string
     folderId: number
     createdBy: number
-    createdDate: String
+    createdDate: string
+    isActive: boolean
 }
 
 export interface subFolderMasterWithFolderAndCabinet extends subFolderMaster {

@@ -50,6 +50,7 @@ type Query {
     orderDesc: String
   ): GetAllCabinet
   getCabinet(id: ID): [cabinet_master]
+  getRouteOfCabinet(id: ID): Route
 
   getAllFolders(
     folderId: Int
@@ -62,6 +63,7 @@ type Query {
     orderDesc: String
   ): GetAllFolder
   getFolder(id: ID): [folder_master]
+  getRouteOfFolder(id: ID): Route
 
   getAllSubFolders(
     subFolderId: Int
@@ -74,10 +76,15 @@ type Query {
     orderDesc: String
   ): GetAllSubFolder
   getSubFolder(id: ID): [sub_folder_master]
+  getRouteOfSubFolder(id: ID): Route
+
+  getRouteOfFile(id: ID): Route
 
   getFolderWithCabinet(id: ID): [folder_master_with_cabinet]
   getFoldersInCabinet(cabinetId: ID): [folder_master]
+  getSubFoldersInFolder(folderId: ID): [sub_folder_master]
   getSubFolderWithFolderAndCabinet(id: ID): [sub_folder_master_with_folder_and_cabinet]
+  getFilesInSubFolder(subFolderId: ID): [fileMaster]
 
   getAllSubFolderMappings(id: ID): [subFolderMapping]
   getSubFoldersOfUser(userId: ID): [subFolderMapping]

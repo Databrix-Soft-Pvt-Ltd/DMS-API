@@ -21,6 +21,21 @@ const queries = {
     return result;
   },
 
+  getRouteOfSubFolder: async (
+    _: undefined,
+    { id }: { id: number | null },
+  ): Promise<{ nameRoute: string; idRoute: string }> => {
+    if (!id) return { nameRoute: '', idRoute: '' };
+    const result: { nameRoute: string; idRoute: string } = await new Promise((resolve, reject) => {
+      dbConnection.query('EXEC GetRouteOfSubFolder ?', [id], (err, rows: any) => {
+        if (err) reject(err);
+        resolve(rows[0]);
+      });
+    });
+
+    return result;
+  },
+
   getSubFolderWithFolderAndCabinet: async (
     _: undefined,
     { id }: { id: number },
@@ -81,6 +96,19 @@ const queries = {
           allSubFolder: result,
           page: { page: 0, size: 0, totalCount: 0 },
         };
+  },
+
+  getSubFoldersInFolder: async (
+    _: undefined,
+    { folderId }: { folderId: number },
+  ): Promise<subFolderMaster[]> => {
+    const result: subFolderMaster[] = await new Promise((resolve, reject) => {
+      dbConnection.query('EXEC GetSubFoldersInFolder ?', [folderId], (err, rows: any) => {
+        if (err) reject(err);
+        resolve(rows);
+      });
+    });
+    return result;
   },
 };
 

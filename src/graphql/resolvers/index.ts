@@ -10,6 +10,7 @@ import { folderMasterQueries, folderMasterMutations } from './folderMaster';
 import { subFolderMappingQueries, subFolderMappingMutations } from './subFolderMapping';
 import { userQueries, userMutations } from './users';
 import { subFolderMasterQueries, subFolderMasterMutations } from './subFolderMaster';
+import { fileMutations, fileQueries } from './fileMaster';
 
 const resolvers = {
   Upload: GraphQLUpload,
@@ -23,6 +24,7 @@ const resolvers = {
     ...folderMasterQueries,
     ...subFolderMasterQueries,
     ...subFolderMappingQueries,
+    ...fileQueries,
     ...userQueries
   },
   Mutation: {
@@ -35,6 +37,7 @@ const resolvers = {
     ...folderMasterMutations,
     ...subFolderMasterMutations,
     ...subFolderMappingMutations,
+    ...fileMutations,
     ...userMutations
   },
 };

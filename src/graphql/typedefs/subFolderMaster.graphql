@@ -16,6 +16,7 @@ type sub_folder_master {
     folderId: Int
     createdBy: Int
     createdDate: String
+    isActive: Boolean
 }
 
 type sub_folder_master_with_folder_and_cabinet {

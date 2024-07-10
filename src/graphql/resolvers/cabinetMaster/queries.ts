@@ -52,10 +52,25 @@ const queries = {
             totalCount: result[0].totalCount || 0,
           },
         }
-      : { 
-            allCabinet: result, 
-            page: { page: 0, size: 0, totalCount: 0 } 
+      : {
+          allCabinet: result,
+          page: { page: 0, size: 0, totalCount: 0 },
         };
+  },
+
+  getRouteOfCabinet: async (
+    _: undefined,
+    { id }: { id: number | null },
+  ): Promise<{ nameRoute: string; idRoute: string }> => {
+    if (!id) return { nameRoute: '', idRoute: '' };
+    const result: { nameRoute: string; idRoute: string } = await new Promise((resolve, reject) => {
+      dbConnection.query('EXEC GetRouteOfCabinet ?', [id], (err, rows: any) => {
+        if (err) reject(err);
+        resolve(rows[0]);
+      });
+    });
+
+    return result;
   },
 };
 

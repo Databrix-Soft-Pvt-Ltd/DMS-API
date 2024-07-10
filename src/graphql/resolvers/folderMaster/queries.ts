@@ -20,6 +20,21 @@ const queries = {
 
     return result;
   },
+  getRouteOfFolder: async (
+    _: undefined,
+    { id }: { id: number | null },
+  ): Promise<{ nameRoute: string; idRoute: string }> => {
+
+    if(!id) return { nameRoute: '', idRoute: '' }
+    const result: { nameRoute: string; idRoute: string } = await new Promise((resolve, reject) => {
+      dbConnection.query('EXEC GetRouteOfFolder ?', [id], (err, rows: any) => {
+        if (err) reject(err);
+        resolve(rows[0]);
+      });
+    });
+
+    return result;
+  },
   getFoldersInCabinet: async (
     _: undefined,
     { cabinetId }: { cabinetId: number },

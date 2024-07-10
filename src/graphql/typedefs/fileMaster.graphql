@@ -1,0 +1,26 @@
+type fileMaster {
+    id: Int
+    fileName: String
+    filePath: String
+    pageCount: Int
+    fileSize: Int
+    fileExtern: String
+    fullContent: String
+    isEncrypted: Boolean
+    cloudPath: String
+    tempId: Int
+    cabinetId: Int
+    folderId: Int
+    subFolderId: Int
+    isIndexing: Boolean
+    isTagging: Boolean
+    isArchive: Boolean
+    isMaker: Boolean
+    makerBy: Int
+    makerDate: String
+    isChecker: Boolean
+    checkerBy: Int
+    createdDate: String
+    uploadBy: Int
+    uploadedDate: String
+}
