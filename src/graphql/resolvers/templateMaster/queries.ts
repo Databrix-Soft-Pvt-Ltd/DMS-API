@@ -48,9 +48,53 @@ const templateQueries = {
         };
   },
 
+  getFreshClassificationsInCategory: async(_: undefined, { categoryId }: { categoryId: number }): Promise<AllTemplates[]> => {
+    const result: AllTemplates[] = await new Promise((resolve, reject) => {
+      dbConnection.query('EXEC GetFreshClassificationsInCategory ?', [categoryId], (err, rows) => {
+        if (err) {
+          reject(err); // Handle error more specifically if possible
+        } else {
+          if (rows && rows.length > 0) {
+            resolve(rows);
+          } else {
+            reject(new Error('No rows returned from the stored procedure.'));
+          }
+        }
+      });
+    });
+
+    result.forEach((item, index) => {
+      result[index].createdDate = new Date(item.createdDate).toISOString();
+    });
+
+    console.log('result', result)
+
+    return result;
+  },
   getAllFreshTemplates: async(_: undefined): Promise<AllTemplates[]> => {
     const result: AllTemplates[] = await new Promise((resolve, reject) => {
       dbConnection.query('EXEC GetAllFreshTemplates', [], (err, rows) => {
+        if (err) {
+          reject(err); // Handle error more specifically if possible
+        } else {
+          if (rows && rows.length > 0) {
+            resolve(rows);
+          } else {
+            reject(new Error('No rows returned from the stored procedure.'));
+          }
+        }
+      });
+    });
+
+    result.forEach((item, index) => {
+      result[index].createdDate = new Date(item.createdDate).toISOString();
+    });
+
+    return result;
+  },
+  getAllFilledTemplates: async(_: undefined): Promise<AllTemplates[]> => {
+    const result: AllTemplates[] = await new Promise((resolve, reject) => {
+      dbConnection.query('EXEC GetAllFilledTemplates', [], (err, rows) => {
         if (err) {
           reject(err); // Handle error more specifically if possible
         } else {

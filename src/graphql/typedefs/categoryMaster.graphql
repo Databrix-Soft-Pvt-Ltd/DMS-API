@@ -1,0 +1,19 @@
+input addCategory {
+  name: String
+  description: String
+  createdBy: Int
+  isActive: Boolean
+}
+type GetAllCategorys {
+  allCategorys: [AllCategorys]
+  page: Page
+}
+type AllCategorys {
+  id: Int
+  name: String
+  description: String
+  isActive: Boolean
+  isDeleted: Boolean
+  createdBy: String
+  createdDate: String
+}

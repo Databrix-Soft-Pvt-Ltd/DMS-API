@@ -1,6 +1,6 @@
 export interface addTemplate {
   name: string;
-  pageId: number;
+  categoryId: number;
   description: number;
   isActive: boolean;
   isDeleted: boolean;
@@ -31,6 +31,8 @@ export interface AllTemplates {
   id: number;
   name: string;
   description: string;
+  categoryId: number;
+  categoryName: string;
   isActive: boolean;
   isDeleted: boolean;
   createdBy: string;

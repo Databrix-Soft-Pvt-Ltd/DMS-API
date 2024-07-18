@@ -1,6 +1,19 @@
 scalar Upload
 
 type Query {
+
+  getAllCategorys(
+    categoryId: Int
+    isActive: Boolean
+    page: Int
+    size: Int
+    searchColumns: String
+    searchParam: String
+    orderAsc: String
+    orderDesc: String
+    createdDate: String
+  ): GetAllCategorys
+
   getAllTemplates(
     templateId: Int
     isActive: Boolean
@@ -14,6 +27,8 @@ type Query {
   ): GetAllTemplate
   getActiveTemplates(id: ID): GetAllTemplate
   getAllFreshTemplates(id: ID): [AllTemplates]
+  getFreshClassificationsInCategory(categoryId: ID): [AllTemplates]
+  getAllFilledTemplates(id: ID): [AllTemplates]
 
   getAllForms(
     templateId: Int
@@ -93,6 +108,10 @@ type Query {
 }
 
 type Mutation {
+  addCategory(addCategory: addCategory): MutationResponse
+  editCategory(id: Int, editCategory: addCategory): MutationResponse
+  deleteCategory(id: Int): MutationResponse
+
   addTemplate(addTemplate: addTemplate): MutationResponse
   editTemplate(id: Int, editTemplate: addTemplate): MutationResponse
   deleteTemplate(id: Int): MutationResponse
@@ -127,6 +146,8 @@ type Mutation {
 
   addSubFolderMapping(addSubFolderMapping: addSubFolderMapping): MutationResponse
   deleteSubFolderMapping(deleteSubFolderMapping: deleteSubFolderMapping): String
+
+  dumpUpload(templateId: Int, data: String): String
 
   login(loginCredentials: loginCredentials): authStatus
   changePassword(changePasswordCredentials: changePasswordCredentials): String

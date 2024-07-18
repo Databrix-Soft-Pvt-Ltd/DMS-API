@@ -1,7 +1,8 @@
 input addTemplate {
   name: String
   description: String
-  pageId: Int
+  categoryId: Int
+  categoryName: String
   createdBy: Int
   isActive: Boolean
 }
@@ -13,7 +14,8 @@ type AllTemplates {
   id: Int
   name: String
   description: String
-  pageId: Int
+  categoryId: Int
+  categoryName: String
   isActive: Boolean
   isDeleted: Boolean
   createdBy: String

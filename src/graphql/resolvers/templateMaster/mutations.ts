@@ -7,7 +7,7 @@ const templateMutations = {
     addTemplate: async (_: undefined, { addTemplate }: { addTemplate: addTemplate }): Promise<{ error: string | null, message: string }> => {
 
         const result: any = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC AddTemplateMaster ?, ?, ?, ?', [addTemplate.name, addTemplate.pageId, addTemplate.description, ''], (err, rows) => {
+            dbConnection.query('EXEC AddTemplateMaster ?, ?, ?, ?', [addTemplate.name, addTemplate.categoryId, addTemplate.description, ''], (err, rows) => {
                 if (err) {
                     reject(err); // Handle error more specifically if possible
                 } else {
@@ -33,7 +33,7 @@ const templateMutations = {
     editTemplate: async (_: undefined, { id, editTemplate }: { id: number, editTemplate: addTemplate }): Promise<{ error: string | null, message: string }> => {
 
         const result: any = await new Promise((resolve, reject) => {
-            dbConnection.query('EXEC EditTemplateMaster ?, ?, ?, ?, ?, ?', [editTemplate?.name || '', editTemplate?.pageId || 0, id, editTemplate?.description || '', editTemplate?.isActive==true ? 1 : 0, ''], (err, rows) => {
+            dbConnection.query('EXEC EditTemplateMaster ?, ?, ?, ?, ?, ?', [editTemplate?.name || '', editTemplate?.categoryId || 0, id, editTemplate?.description || '', editTemplate?.isActive==true ? 1 : 0, ''], (err, rows) => {
                 if (err) {
                     reject(err); // Handle error more specifically if possible
                 } else {
